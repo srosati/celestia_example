@@ -72,13 +72,22 @@ func main() {
 		panic(err)
 	}
 
-	cli, err := client.NewClient(context.Background(), "https://api.celestia-arabica-11.com", token)
+	cli, err := client.NewClient(context.Background(), "http://localhost:26658", token)
 	if err != nil {
 		log.Println(err)
 		panic(err)
 	}
 
 	msg := "Hello, Nico!"
+	//blobs := []da.Blob{da.Blob(msg)}
+	//
+	//ns := namespace.MustNewV0([]byte("Aligned")).Bytes()
+	//log.Println("namespace", hex.EncodeToString(ns))
+	//ids, err := cli.DA.Submit(context.Background(), blobs, 0.1, ns)
+	//if err != nil {
+	//	log.Println(err)
+	//	return
+	//}
 
 	ns, err := share.NewBlobNamespaceV0([]byte("Aligned"))
 	if err != nil {
@@ -102,5 +111,14 @@ func main() {
 	}
 
 	log.Println(string(gotBlob.Data))
+
+	//log.Println(hex.EncodeToString(ids[0]))
+	//
+	//gotBlobs, err := cli.DA.Get(context.Background(), ids, ns)
+	//if err != nil {
+	//	return
+	//}
+	//
+	//log.Println(hex.EncodeToString(gotBlobs[0]))
 
 }
